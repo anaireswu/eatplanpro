@@ -49,7 +49,7 @@
       radial-gradient(circle at 10% 5%, rgba(22, 160, 133, 0.22), transparent 28%),
       radial-gradient(circle at 95% 15%, rgba(124, 58, 237, 0.15), transparent 30%),
       linear-gradient(180deg, #F9FBFF 0%, #F4F7FB 48%, #EFF4F8 100%);
-    padding: 28px 18px 42px;
+    padding: 16px 14px 28px;
   }
 
   button, input, select { font: inherit; }
@@ -64,8 +64,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 18px;
-    margin-bottom: 22px;
+    gap: 12px;
+    margin-bottom: 12px;
   }
 
   .brand {
@@ -75,9 +75,9 @@
   }
 
   .brand-mark {
-    width: 44px;
-    height: 44px;
-    border-radius: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
     display: grid;
     place-items: center;
     color: #FFFFFF;
@@ -88,7 +88,7 @@
   }
 
   .brand-title {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 800;
     letter-spacing: -0.04em;
   }
@@ -124,111 +124,113 @@
   .hero {
     position: relative;
     overflow: hidden;
-    border-radius: 34px;
-    padding: 34px;
+    border-radius: 18px;
+    padding: 12px 18px;
     border: 1px solid rgba(255, 255, 255, 0.68);
     background:
       linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.70)),
-      radial-gradient(circle at 85% 15%, rgba(22, 160, 133, 0.26), transparent 32%),
-      radial-gradient(circle at 10% 90%, rgba(37, 99, 235, 0.16), transparent 30%);
-    box-shadow: var(--shadow);
-    margin-bottom: 22px;
+      radial-gradient(circle at 85% 15%, rgba(22, 160, 133, 0.22), transparent 30%),
+      radial-gradient(circle at 10% 90%, rgba(37, 99, 235, 0.12), transparent 28%);
+    box-shadow: var(--shadow-soft);
+    margin-bottom: 10px;
   }
 
   .hero::after {
     content: '';
     position: absolute;
-    right: -80px;
-    bottom: -90px;
-    width: 280px;
-    height: 280px;
+    right: -70px;
+    bottom: -78px;
+    width: 210px;
+    height: 210px;
     border-radius: 50%;
-    border: 44px solid rgba(22, 160, 133, 0.09);
+    border: 32px solid rgba(22, 160, 133, 0.08);
   }
 
   .hero-content {
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 26px;
-    align-items: stretch;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 12px;
+    align-items: center;
   }
 
   .eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     width: fit-content;
-    padding: 8px 12px;
+    padding: 4px 9px;
     border-radius: 999px;
     color: var(--accent-dark);
     background: var(--accent-soft);
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 800;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    margin-bottom: 16px;
+    margin-bottom: 6px;
   }
 
   h1 {
-    font-size: clamp(36px, 6vw, 66px);
-    line-height: 0.95;
+    font-size: clamp(20px, 2.7vw, 30px);
+    line-height: 1.02;
     font-weight: 800;
-    letter-spacing: -0.075em;
-    max-width: 620px;
+    letter-spacing: -0.055em;
+    max-width: 430px;
   }
 
   .hero-copy {
-    max-width: 560px;
-    margin-top: 16px;
+    max-width: 430px;
+    margin-top: 5px;
     color: var(--muted);
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: 12px;
+    line-height: 1.35;
   }
 
   .hero-stats {
     display: grid;
-    gap: 12px;
-    align-content: end;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    align-content: center;
   }
 
   .hero-card {
-    padding: 18px;
-    border-radius: 24px;
+    padding: 9px 11px;
+    border-radius: 14px;
     background: rgba(255, 255, 255, 0.72);
     border: 1px solid rgba(255, 255, 255, 0.80);
-    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
     backdrop-filter: blur(18px);
   }
 
   .hero-card-label {
-    font-size: 12px;
+    font-size: 10px;
     color: var(--muted);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    margin-bottom: 6px;
+    margin-bottom: 3px;
   }
 
   .hero-card-value {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 28px;
+    font-size: 17px;
     font-weight: 700;
     letter-spacing: -0.04em;
   }
 
   .hero-card small {
     display: block;
-    margin-top: 5px;
+    margin-top: 2px;
     color: var(--faint);
-    font-size: 12px;
+    font-size: 10px;
+    line-height: 1.25;
   }
 
   .app-grid {
     display: grid;
-    grid-template-columns: minmax(0, 390px) minmax(0, 1fr);
-    gap: 22px;
+    grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+    gap: 14px;
     align-items: start;
   }
 
@@ -241,37 +243,37 @@
   }
 
   .panel-header {
-    padding: 22px 22px 0;
+    padding: 16px 18px 0;
   }
 
   .panel-title {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 800;
     letter-spacing: -0.035em;
   }
 
   .panel-note {
     color: var(--muted);
-    font-size: 13px;
-    line-height: 1.5;
-    margin-top: 6px;
+    font-size: 12px;
+    line-height: 1.4;
+    margin-top: 4px;
   }
 
-  .panel-body { padding: 22px; }
+  .panel-body { padding: 16px 18px; }
 
   .summary-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-bottom: 16px;
+    gap: 8px;
+    margin-bottom: 10px;
   }
 
   .metric-card {
     position: relative;
     overflow: hidden;
-    min-height: 112px;
-    padding: 16px;
-    border-radius: 22px;
+    min-height: 86px;
+    padding: 12px 14px;
+    border-radius: 16px;
     background: var(--surface-strong);
     border: 1px solid var(--border);
   }
@@ -312,11 +314,11 @@
     position: relative;
     z-index: 1;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 31px;
+    font-size: 24px;
     font-weight: 700;
     line-height: 1;
-    letter-spacing: -0.07em;
-    margin-top: 15px;
+    letter-spacing: -0.06em;
+    margin-top: 8px;
   }
 
   .metric-unit {
@@ -330,8 +332,8 @@
   .metric-card.primary .metric-unit { color: rgba(255, 255, 255, 0.72); }
 
   .goal-card {
-    padding: 18px;
-    border-radius: 24px;
+    padding: 14px;
+    border-radius: 18px;
     background: var(--surface-strong);
     border: 1px solid var(--border);
   }
@@ -402,9 +404,103 @@
     font-weight: 700;
   }
 
+  /* Resumo do plano mais compacto */
+  .meals-card .panel-header {
+    padding: 12px 18px 0;
+  }
+
+  .meals-card .panel-title {
+    font-size: 14px;
+  }
+
+  .meals-card .panel-note {
+    font-size: 11px;
+    line-height: 1.25;
+    margin-top: 3px;
+  }
+
+  .meals-card .panel-body {
+    padding: 12px 18px 16px;
+  }
+
+  .summary-grid {
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .metric-card {
+    min-height: 62px;
+    padding: 9px 12px;
+    border-radius: 14px;
+  }
+
+  .metric-card.primary {
+    box-shadow: 0 10px 24px rgba(22, 160, 133, 0.18);
+  }
+
+  .metric-card::after {
+    right: -22px;
+    top: -30px;
+    width: 72px;
+    height: 72px;
+  }
+
+  .metric-label {
+    font-size: 10px;
+    letter-spacing: 0.06em;
+  }
+
+  .metric-value {
+    font-size: 20px;
+    margin-top: 5px;
+  }
+
+  .metric-unit {
+    font-size: 11px;
+    margin-top: 4px;
+  }
+
+  .goal-card {
+    padding: 10px 12px;
+    border-radius: 16px;
+  }
+
+  .goal-top {
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .goal-title {
+    font-size: 12px;
+  }
+
+  .goal-input-wrap {
+    min-height: 32px;
+    padding: 4px 9px;
+  }
+
+  .goal-input-wrap input {
+    width: 62px;
+    font-size: 12px;
+  }
+
+  .goal-input-wrap span {
+    font-size: 11px;
+  }
+
+  .bar-bg {
+    height: 8px;
+  }
+
+  .bar-labels {
+    margin-top: 7px;
+    font-size: 11px;
+  }
+
+
   .form-card {
     position: sticky;
-    top: 18px;
+    top: 12px;
   }
 
   .section-label {
@@ -424,13 +520,13 @@
 
   .field, .select-field {
     width: 100%;
-    min-height: 48px;
+    min-height: 40px;
     border: 1px solid var(--border-strong);
-    border-radius: 16px;
+    border-radius: 12px;
     background: rgba(255, 255, 255, 0.86);
     color: var(--text);
     outline: none;
-    padding: 0 15px;
+    padding: 0 12px;
     transition: border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
   }
 
@@ -441,11 +537,12 @@
   }
 
   .btn {
-    min-height: 48px;
-    padding: 0 16px;
+    min-height: 40px;
+    padding: 0 14px;
     border: 0;
-    border-radius: 16px;
+    border-radius: 12px;
     font-weight: 800;
+    font-size: 13px;
     cursor: pointer;
     transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
   }
@@ -545,14 +642,14 @@
     font-size: 13px;
   }
 
-  .meals-card .panel-body { padding-top: 12px; }
+  .meals-card .panel-body { padding-top: 8px; }
 
   .meal-section {
     border: 1px solid var(--border);
     background: rgba(255, 255, 255, 0.74);
-    border-radius: 24px;
-    padding: 16px;
-    margin-top: 14px;
+    border-radius: 18px;
+    padding: 12px;
+    margin-top: 10px;
   }
 
   .meal-header {
@@ -603,13 +700,13 @@
   .food-item {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto auto;
-    gap: 12px;
+    gap: 10px;
     align-items: center;
-    padding: 13px;
-    border-radius: 18px;
+    padding: 9px 11px;
+    border-radius: 14px;
     background: #FFFFFF;
     border: 1px solid var(--border);
-    margin-top: 8px;
+    margin-top: 6px;
   }
 
   .food-name {
@@ -669,19 +766,19 @@
 
   .add-meal-row {
     display: flex;
-    gap: 10px;
-    margin-top: 16px;
+    gap: 8px;
+    margin-top: 12px;
   }
 
-  .add-meal-row .field { min-height: 46px; }
-  .add-meal-row .btn { min-height: 46px; }
+  .add-meal-row .field { min-height: 40px; }
+  .add-meal-row .btn { min-height: 40px; }
 
   .footer-note {
-    margin: 22px auto 0;
+    margin: 14px auto 0;
     max-width: 720px;
     color: var(--muted);
-    font-size: 12px;
-    line-height: 1.6;
+    font-size: 11px;
+    line-height: 1.5;
     text-align: center;
   }
 
@@ -714,17 +811,79 @@
     transform: translate(-50%, 0);
   }
 
+  .qty-panel {
+    margin-top: 12px;
+    padding: 14px;
+    border-radius: 16px;
+    border: 1.5px solid rgba(22, 160, 133, 0.30);
+    background: var(--accent-soft);
+    animation: slideDown 0.22s ease;
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .qty-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(22, 160, 133, 0.18);
+  }
+
+  .qty-panel-name {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--accent-dark);
+    flex: 1;
+    min-width: 0;
+  }
+
+  .qty-panel-cal {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .qty-preview {
+    margin-top: 10px;
+    margin-bottom: 14px;
+    padding: 10px 14px;
+    border-radius: 14px;
+    background: rgba(22, 160, 133, 0.10);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent-dark);
+    min-height: 36px;
+  }
+
+  .qty-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .qty-actions .btn { flex: 1; }
+
   @media (max-width: 900px) {
     .hero-content, .app-grid { grid-template-columns: 1fr; }
     .form-card { position: static; }
-    .hero { padding: 26px; border-radius: 28px; }
+    .hero { padding: 14px 16px; border-radius: 18px; }
   }
 
   @media (max-width: 620px) {
     body { padding: 18px 12px 32px; }
     .topbar { align-items: flex-start; }
     .top-actions { display: none; }
-    .hero { padding: 22px; }
+    .hero { padding: 13px 15px; }
+    .hero-stats { grid-template-columns: 1fr; }
     .summary-grid, .controls-grid, .inline-grid { grid-template-columns: 1fr; }
     .search-row, .add-meal-row { flex-direction: column; }
     .btn, .field, .select-field { width: 100%; }
@@ -732,6 +891,360 @@
     .food-kcal { grid-column: 1 / 2; }
     .del-btn { grid-column: 2 / 3; grid-row: 1 / 3; }
   }
+
+
+  /* Ajuste super compacto: menos altura, menos espessura e conteúdo mais para cima */
+  body {
+    padding: 4px 10px 16px;
+  }
+
+  .shell {
+    width: min(1180px, 100%);
+  }
+
+  .topbar {
+    display: none;
+  }
+
+  .hero {
+    padding: 8px 18px;
+    border-radius: 16px;
+    margin-bottom: 8px;
+    box-shadow: 0 10px 26px rgba(15, 23, 42, 0.07);
+  }
+
+  .hero::after {
+    right: -54px;
+    bottom: -58px;
+    width: 150px;
+    height: 150px;
+    border-width: 22px;
+  }
+
+  .hero-content {
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 10px;
+  }
+
+  .eyebrow {
+    padding: 3px 8px;
+    font-size: 9px;
+    margin-bottom: 4px;
+  }
+
+  h1 {
+    font-size: clamp(18px, 2.1vw, 26px);
+    line-height: 0.98;
+    max-width: 380px;
+  }
+
+  .hero-copy {
+    max-width: 500px;
+    margin-top: 4px;
+    font-size: 11px;
+    line-height: 1.25;
+  }
+
+  .hero-stats {
+    gap: 7px;
+  }
+
+  .hero-card {
+    padding: 7px 10px;
+    border-radius: 12px;
+    box-shadow: 0 6px 14px rgba(15, 23, 42, 0.055);
+  }
+
+  .hero-card-label {
+    font-size: 9px;
+    margin-bottom: 2px;
+  }
+
+  .hero-card-value {
+    font-size: 15px;
+  }
+
+  .hero-card small {
+    margin-top: 2px;
+    font-size: 9px;
+    line-height: 1.15;
+  }
+
+  .app-grid {
+    grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .panel {
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.065);
+  }
+
+  .panel-header,
+  .meals-card .panel-header {
+    padding: 10px 14px 0;
+  }
+
+  .panel-title,
+  .meals-card .panel-title {
+    font-size: 13px;
+  }
+
+  .panel-note,
+  .meals-card .panel-note {
+    font-size: 11px;
+    line-height: 1.22;
+    margin-top: 3px;
+  }
+
+  .panel-body,
+  .meals-card .panel-body {
+    padding: 10px 14px 12px;
+  }
+
+  .section-label {
+    font-size: 9.5px;
+    margin-bottom: 7px;
+  }
+
+  .search-row {
+    gap: 7px;
+    margin-bottom: 8px;
+  }
+
+  .field,
+  .select-field,
+  .btn,
+  .add-meal-row .field,
+  .add-meal-row .btn {
+    min-height: 34px;
+    border-radius: 10px;
+    font-size: 12px;
+  }
+
+  .field,
+  .select-field {
+    padding: 0 10px;
+  }
+
+  .btn {
+    padding: 0 12px;
+  }
+
+  .summary-grid {
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .metric-card {
+    min-height: 48px;
+    padding: 7px 10px;
+    border-radius: 12px;
+  }
+
+  .metric-card.primary {
+    box-shadow: 0 8px 18px rgba(22, 160, 133, 0.16);
+  }
+
+  .metric-card::after {
+    right: -18px;
+    top: -24px;
+    width: 58px;
+    height: 58px;
+  }
+
+  .metric-label {
+    font-size: 9px;
+    letter-spacing: 0.055em;
+  }
+
+  .metric-value {
+    font-size: 17px;
+    margin-top: 3px;
+  }
+
+  .metric-unit {
+    font-size: 10px;
+    margin-top: 2px;
+  }
+
+  .goal-card {
+    padding: 8px 10px;
+    border-radius: 14px;
+  }
+
+  .goal-top {
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .goal-title {
+    font-size: 11px;
+  }
+
+  .goal-input-wrap {
+    min-height: 28px;
+    padding: 3px 8px;
+  }
+
+  .goal-input-wrap input {
+    width: 56px;
+    font-size: 11px;
+  }
+
+  .goal-input-wrap span {
+    font-size: 10px;
+  }
+
+  .bar-bg {
+    height: 6px;
+  }
+
+  .bar-labels {
+    margin-top: 5px;
+    font-size: 10px;
+  }
+
+  .meal-section {
+    border-radius: 14px;
+    padding: 8px;
+    margin-top: 8px;
+  }
+
+  .meal-header {
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .meal-name-wrap {
+    gap: 8px;
+  }
+
+  .meal-dot {
+    width: 9px;
+    height: 9px;
+    box-shadow: 0 0 0 5px var(--accent-soft);
+  }
+
+  .meal-name {
+    font-size: 14px;
+  }
+
+  .meal-kcal {
+    padding: 5px 9px;
+    font-size: 11px;
+  }
+
+  .empty-msg {
+    min-height: 48px;
+    border-radius: 14px;
+    font-size: 12px;
+  }
+
+  .food-item {
+    gap: 8px;
+    padding: 7px 9px;
+    border-radius: 12px;
+    margin-top: 5px;
+  }
+
+  .food-name {
+    font-size: 13px;
+  }
+
+  .food-detail {
+    margin-top: 3px;
+    font-size: 10px;
+  }
+
+  .food-kcal {
+    font-size: 12px;
+  }
+
+  .del-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+  }
+
+  .add-meal-row {
+    gap: 7px;
+    margin-top: 8px;
+  }
+
+  .footer-note {
+    margin-top: 8px;
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+  .results-box {
+    margin-top: 10px;
+    border-radius: 14px;
+  }
+
+  .result-item {
+    padding: 10px 12px;
+  }
+
+  .result-name {
+    font-size: 12px;
+    margin-bottom: 3px;
+  }
+
+  .result-cal {
+    font-size: 10px;
+  }
+
+  .result-add {
+    min-width: 28px;
+    height: 28px;
+    border-radius: 10px;
+  }
+
+  .qty-panel {
+    margin-top: 8px;
+    padding: 10px;
+    border-radius: 14px;
+  }
+
+  .qty-panel-header {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+
+  .qty-preview {
+    margin-top: 7px;
+    margin-bottom: 9px;
+    padding: 8px 10px;
+    min-height: 30px;
+    border-radius: 12px;
+    font-size: 10px;
+  }
+
+  @media (max-width: 900px) {
+    body { padding: 4px 8px 14px; }
+    .hero-content,
+    .app-grid { grid-template-columns: 1fr; }
+    .hero { padding: 8px 12px; }
+    .form-card { position: static; }
+  }
+
+  @media (max-width: 620px) {
+    body { padding: 4px 8px 14px; }
+    .hero { padding: 8px 11px; }
+    h1 { font-size: 21px; }
+    .hero-stats,
+    .summary-grid,
+    .controls-grid,
+    .inline-grid { grid-template-columns: 1fr; }
+    .search-row,
+    .add-meal-row { flex-direction: column; }
+    .btn,
+    .field,
+    .select-field { width: 100%; }
+  }
+
 </style>
 </head>
 <body>
@@ -785,25 +1298,36 @@
           <button class="btn btn-primary" type="button" onclick="buscarAlimento()">Buscar</button>
         </div>
 
-        <div class="controls-grid">
-          <div>
-            <label class="control-label" for="qty-input">Quantidade</label>
-            <div class="inline-grid">
-              <input class="field" type="number" id="qty-input" value="100" min="1">
-              <select class="select-field" id="unit-select">
-                <option value="g">g</option>
-                <option value="ml">ml</option>
-                <option value="unidade">unidade</option>
-              </select>
+        <div class="results-box" id="search-results"></div>
+
+        <div class="qty-panel" id="qty-panel" style="display:none;">
+          <div class="qty-panel-header">
+            <div class="qty-panel-name" id="qty-panel-name"></div>
+            <div class="qty-panel-cal" id="qty-panel-cal"></div>
+          </div>
+          <div class="controls-grid">
+            <div>
+              <label class="control-label" for="qty-input">Quantidade</label>
+              <div class="inline-grid">
+                <input class="field" type="number" id="qty-input" value="100" min="1" oninput="updateQtyPreview()">
+                <select class="select-field" id="unit-select" onchange="updateQtyPreview()">
+                  <option value="g">g</option>
+                  <option value="ml">ml</option>
+                  <option value="unidade">unidade</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label class="control-label" for="meal-select-add">Refeição</label>
+              <select class="select-field" id="meal-select-add"></select>
             </div>
           </div>
-          <div>
-            <label class="control-label" for="meal-select-add">Refeição</label>
-            <select class="select-field" id="meal-select-add"></select>
+          <div class="qty-preview" id="qty-preview"></div>
+          <div class="qty-actions">
+            <button class="btn btn-soft" type="button" onclick="cancelQtyPanel()">Cancelar</button>
+            <button class="btn btn-primary" type="button" onclick="confirmAddFood()">Adicionar</button>
           </div>
         </div>
-
-        <div class="results-box" id="search-results"></div>
       </div>
     </aside>
 
@@ -1016,6 +1540,136 @@ function addMeal() {
   showToast('Refeição adicionada.');
 }
 
+
+const LOCAL_FOODS = [
+  { product_name: 'Arroz branco cozido', brands: 'Base local', nutriments: { 'energy-kcal_100g': 128, 'proteins_100g': 2.5, 'carbohydrates_100g': 28.1, 'fat_100g': 0.2 } },
+  { product_name: 'Arroz integral cozido', brands: 'Base local', nutriments: { 'energy-kcal_100g': 124, 'proteins_100g': 2.6, 'carbohydrates_100g': 25.8, 'fat_100g': 1.0 } },
+  { product_name: 'Feijão carioca cozido', brands: 'Base local', nutriments: { 'energy-kcal_100g': 76, 'proteins_100g': 4.8, 'carbohydrates_100g': 13.6, 'fat_100g': 0.5 } },
+  { product_name: 'Feijão preto cozido', brands: 'Base local', nutriments: { 'energy-kcal_100g': 77, 'proteins_100g': 4.5, 'carbohydrates_100g': 14.0, 'fat_100g': 0.5 } },
+  { product_name: 'Peito de frango grelhado', brands: 'Base local', nutriments: { 'energy-kcal_100g': 165, 'proteins_100g': 31.0, 'carbohydrates_100g': 0, 'fat_100g': 3.6 } },
+  { product_name: 'Carne bovina magra cozida', brands: 'Base local', nutriments: { 'energy-kcal_100g': 219, 'proteins_100g': 29.0, 'carbohydrates_100g': 0, 'fat_100g': 11.0 } },
+  { product_name: 'Ovo cozido', brands: 'Base local', nutriments: { 'energy-kcal_100g': 155, 'proteins_100g': 13.0, 'carbohydrates_100g': 1.1, 'fat_100g': 11.0 } },
+  { product_name: 'Banana prata', brands: 'Base local', nutriments: { 'energy-kcal_100g': 89, 'proteins_100g': 1.1, 'carbohydrates_100g': 22.8, 'fat_100g': 0.3 } },
+  { product_name: 'Maçã', brands: 'Base local', nutriments: { 'energy-kcal_100g': 52, 'proteins_100g': 0.3, 'carbohydrates_100g': 14.0, 'fat_100g': 0.2 } },
+  { product_name: 'Tomate', brands: 'Base local', nutriments: { 'energy-kcal_100g': 18, 'proteins_100g': 0.9, 'carbohydrates_100g': 3.9, 'fat_100g': 0.2 } },
+  { product_name: 'Queijo muçarela', brands: 'Base local', nutriments: { 'energy-kcal_100g': 300, 'proteins_100g': 22.0, 'carbohydrates_100g': 2.2, 'fat_100g': 22.0 } },
+  { product_name: 'Leite integral', brands: 'Base local', nutriments: { 'energy-kcal_100g': 61, 'proteins_100g': 3.2, 'carbohydrates_100g': 4.8, 'fat_100g': 3.3 } },
+  { product_name: 'Pão francês', brands: 'Base local', nutriments: { 'energy-kcal_100g': 300, 'proteins_100g': 8.0, 'carbohydrates_100g': 58.6, 'fat_100g': 3.1 } },
+  { product_name: 'Batata inglesa cozida', brands: 'Base local', nutriments: { 'energy-kcal_100g': 87, 'proteins_100g': 1.9, 'carbohydrates_100g': 20.1, 'fat_100g': 0.1 } },
+  { product_name: 'Macarrão cozido', brands: 'Base local', nutriments: { 'energy-kcal_100g': 158, 'proteins_100g': 5.8, 'carbohydrates_100g': 30.9, 'fat_100g': 0.9 } },
+  { product_name: 'Aveia em flocos', brands: 'Base local', nutriments: { 'energy-kcal_100g': 389, 'proteins_100g': 16.9, 'carbohydrates_100g': 66.3, 'fat_100g': 6.9 } },
+  { product_name: 'Iogurte natural integral', brands: 'Base local', nutriments: { 'energy-kcal_100g': 61, 'proteins_100g': 3.5, 'carbohydrates_100g': 4.7, 'fat_100g': 3.3 } },
+  { product_name: 'Azeite de oliva', brands: 'Base local', nutriments: { 'energy-kcal_100g': 884, 'proteins_100g': 0, 'carbohydrates_100g': 0, 'fat_100g': 100 } },
+  { product_name: 'Alface', brands: 'Base local', nutriments: { 'energy-kcal_100g': 15, 'proteins_100g': 1.4, 'carbohydrates_100g': 2.9, 'fat_100g': 0.2 } },
+  { product_name: 'Cenoura cozida', brands: 'Base local', nutriments: { 'energy-kcal_100g': 35, 'proteins_100g': 0.8, 'carbohydrates_100g': 8.2, 'fat_100g': 0.2 } }
+];
+
+function normalizeSearchText(value) {
+  return String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim();
+}
+
+function toNutrientNumber(value) {
+  const number = Number(value);
+  return Number.isFinite(number) ? number : 0;
+}
+
+function getKcal100g(nutriments = {}) {
+  const kcal = toNutrientNumber(nutriments['energy-kcal_100g']) || toNutrientNumber(nutriments['energy-kcal']);
+  const kj = toNutrientNumber(nutriments['energy-kj_100g']) || toNutrientNumber(nutriments['energy_100g']);
+  return kcal || (kj ? kj / 4.184 : 0);
+}
+
+function cleanProducts(products = []) {
+  return products
+    .filter(product => product && product.product_name && product.nutriments && getKcal100g(product.nutriments) > 0)
+    .map(product => ({
+      product_name: String(product.product_name || '').trim(),
+      brands: product.brands ? String(product.brands).split(',')[0].trim() : 'Produto cadastrado',
+      nutriments: {
+        ...product.nutriments,
+        'energy-kcal_100g': getKcal100g(product.nutriments),
+        'proteins_100g': toNutrientNumber(product.nutriments['proteins_100g']),
+        'carbohydrates_100g': toNutrientNumber(product.nutriments['carbohydrates_100g']),
+        'fat_100g': toNutrientNumber(product.nutriments['fat_100g'])
+      }
+    }));
+}
+
+function getLocalResults(query) {
+  const normalizedQuery = normalizeSearchText(query);
+  const tokens = normalizedQuery.split(/\s+/).filter(Boolean);
+
+  return LOCAL_FOODS.filter(food => {
+    const text = normalizeSearchText(`${food.product_name} ${food.brands}`);
+    return text.includes(normalizedQuery) || tokens.every(token => text.includes(token));
+  }).slice(0, 8);
+}
+
+function renderSearchResults(products) {
+  const box = document.getElementById('search-results');
+  searchResults = products.slice(0, 8);
+
+  box.innerHTML = searchResults.map((product, index) => {
+    const kcal = Math.round(getKcal100g(product.nutriments));
+    const name = String(product.product_name || '').substring(0, 68);
+    const brand = product.brands ? String(product.brands).split(',')[0].trim() : 'Produto cadastrado';
+    return `
+      <div class="result-item" onclick="selectFood(${index})" role="button" tabindex="0">
+        <div>
+          <div class="result-name">${escapeHtml(name)}</div>
+          <div class="result-cal">${escapeHtml(brand)} · ${kcal} kcal / 100g</div>
+        </div>
+        <span class="result-add">+</span>
+      </div>
+    `;
+  }).join('');
+}
+
+function fetchJsonWithTimeout(url, timeoutMs = 4500) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+  return fetch(url, {
+    signal: controller.signal,
+    headers: { 'Accept': 'application/json' }
+  })
+    .then(response => {
+      if (!response.ok) throw new Error('Falha na resposta da API');
+      return response.json();
+    })
+    .finally(() => clearTimeout(timer));
+}
+
+async function searchOnlineProducts(query) {
+  const encoded = encodeURIComponent(query);
+  const urls = [
+    `https://world.openfoodfacts.org/api/v2/search?search_terms=${encoded}&page_size=20&countries_tags_en=Brazil&fields=product_name,brands,nutriments`,
+    `https://br.openfoodfacts.org/cgi/search.pl?search_terms=${encoded}&search_simple=1&action=process&json=1&page_size=20&fields=product_name,brands,nutriments`,
+    `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encoded}&search_simple=1&action=process&json=1&page_size=20&lc=pt&cc=br&fields=product_name,brands,nutriments`
+  ];
+
+  const attempts = urls.map(async url => {
+    const data = await fetchJsonWithTimeout(url);
+    const products = cleanProducts(data.products || []);
+    if (!products.length) throw new Error('Sem produtos válidos');
+    return products;
+  });
+
+  try {
+    if (typeof Promise.any === 'function') return await Promise.any(attempts);
+    const results = await Promise.allSettled(attempts);
+    const fulfilled = results.find(result => result.status === 'fulfilled');
+    return fulfilled ? fulfilled.value : [];
+  } catch (error) {
+    console.warn('Busca online indisponível. Usando base local quando possível.', error);
+    return [];
+  }
+}
+
 async function buscarAlimento() {
   const query = document.getElementById('search-input').value.trim();
   const box = document.getElementById('search-results');
@@ -1030,48 +1684,77 @@ async function buscarAlimento() {
   box.innerHTML = '<div class="status-msg">Buscando alimentos...</div>';
   searchResults = [];
 
+  const localResults = getLocalResults(query);
+  let products = [];
+
   try {
-    const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(query)}&search_simple=1&action=process&json=1&page_size=12&lc=pt&cc=br&fields=product_name,brands,nutriments`;
-    const response = await fetch(url);
-
-    if (!response.ok) throw new Error('Falha na resposta da API');
-
-    const data = await response.json();
-    const products = (data.products || []).filter(product =>
-      product.product_name &&
-      product.nutriments &&
-      Number.isFinite(Number(product.nutriments['energy-kcal_100g']))
-    );
-
-    if (!products.length) {
-      box.innerHTML = '<div class="status-msg">Nenhum resultado encontrado. Tente outro termo.</div>';
-      return;
-    }
-
-    searchResults = products.slice(0, 8);
-    box.innerHTML = searchResults.map((product, index) => {
-      const kcal = Math.round(Number(product.nutriments['energy-kcal_100g']) || 0);
-      const name = String(product.product_name || '').substring(0, 68);
-      const brand = product.brands ? String(product.brands).split(',')[0].trim() : 'Produto cadastrado';
-      return `
-        <div class="result-item" onclick="selectFood(${index})" role="button" tabindex="0">
-          <div>
-            <div class="result-name">${escapeHtml(name)}</div>
-            <div class="result-cal">${escapeHtml(brand)} · ${kcal} kcal / 100g</div>
-          </div>
-          <span class="result-add">+</span>
-        </div>
-      `;
-    }).join('');
+    products = await searchOnlineProducts(query);
   } catch (error) {
-    box.innerHTML = '<div class="status-msg">Erro na busca. Verifique sua conexão e tente novamente.</div>';
+    console.warn('Erro na busca online.', error);
   }
+
+  if (!products.length) products = localResults;
+
+  if (!products.length) {
+    box.innerHTML = '<div class="status-msg">Não encontrei esse alimento agora. Tente outro termo ou use opções comuns como arroz, frango, ovo, feijão ou banana.</div>';
+    return;
+  }
+
+  renderSearchResults(products);
 }
 
 function selectFood(index) {
   const product = searchResults[index];
   if (!product) return;
 
+  // Store selected product globally
+  window._selectedProduct = { product, index };
+
+  const kcalPer100 = Math.round(Number(product.nutriments?.['energy-kcal_100g']) || 0);
+  const name = String(product.product_name || 'Alimento').substring(0, 68);
+
+  // Populate qty panel
+  document.getElementById('qty-panel-name').textContent = name;
+  document.getElementById('qty-panel-cal').textContent = kcalPer100 + ' kcal/100g';
+  document.getElementById('qty-input').value = 100;
+  document.getElementById('unit-select').value = 'g';
+
+  updateQtyPreview();
+
+  // Hide results, show qty panel
+  document.getElementById('search-results').style.display = 'none';
+  document.getElementById('qty-panel').style.display = 'block';
+  document.getElementById('qty-input').focus();
+}
+
+function updateQtyPreview() {
+  const sel = window._selectedProduct;
+  if (!sel) return;
+  const nutriments = sel.product.nutriments || {};
+  const qty = parseFloat(document.getElementById('qty-input').value) || 0;
+  const ratio = qty / 100;
+
+  const kcal = Math.round((Number(nutriments['energy-kcal_100g']) || 0) * ratio);
+  const prot = Math.round((Number(nutriments['proteins_100g']) || 0) * ratio);
+  const carb = Math.round((Number(nutriments['carbohydrates_100g']) || 0) * ratio);
+  const fat  = Math.round((Number(nutriments['fat_100g']) || 0) * ratio);
+  const unit = document.getElementById('unit-select').value;
+
+  document.getElementById('qty-preview').textContent =
+    `${qty}${unit} → ${kcal} kcal · P ${prot}g · C ${carb}g · G ${fat}g`;
+}
+
+function cancelQtyPanel() {
+  window._selectedProduct = null;
+  document.getElementById('qty-panel').style.display = 'none';
+  document.getElementById('search-results').style.display = 'block';
+}
+
+function confirmAddFood() {
+  const sel = window._selectedProduct;
+  if (!sel) return;
+
+  const product = sel.product;
   const qty = parseFloat(document.getElementById('qty-input').value) || 100;
   const unit = document.getElementById('unit-select').value;
   const nutriments = product.nutriments || {};
@@ -1091,6 +1774,8 @@ function selectFood(index) {
   const meal = meals.find(item => item.id === mealId);
   if (meal) meal.foods.push(food);
 
+  window._selectedProduct = null;
+  document.getElementById('qty-panel').style.display = 'none';
   document.getElementById('search-results').style.display = 'none';
   document.getElementById('search-input').value = '';
   renderMeals();
@@ -1103,6 +1788,12 @@ document.getElementById('search-input').addEventListener('keydown', event => {
 
 document.getElementById('new-meal-input').addEventListener('keydown', event => {
   if (event.key === 'Enter') addMeal();
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Enter' && document.activeElement?.id === 'qty-input') {
+    confirmAddFood();
+  }
 });
 
 document.getElementById('goal-input').addEventListener('input', () => {
