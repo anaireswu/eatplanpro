@@ -1377,6 +1377,68 @@
   }
 
 
+  .edit-food-btn {
+    min-height: 30px;
+    padding: 0 10px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--blue-soft);
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+
+  .edit-food-btn:hover {
+    background: #DDEAFF;
+  }
+
+  .edit-food-btn:active {
+    transform: translateY(1px);
+  }
+
+  .edit-food-panel {
+    grid-column: 1 / -1;
+    margin-top: 2px;
+    padding: 10px;
+    border-radius: 14px;
+    border: 1px solid rgba(37, 99, 235, 0.18);
+    background: rgba(234, 241, 255, 0.68);
+  }
+
+  .edit-food-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 8px;
+    align-items: end;
+  }
+
+  .edit-food-preview {
+    margin-top: 8px;
+    color: var(--blue);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .edit-food-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  @media (max-width: 620px) {
+    .edit-food-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .edit-food-actions {
+      flex-direction: column;
+    }
+  }
+
+
 
   .hero-stats {
     display: none;
@@ -2388,6 +2450,53 @@ async function downloadPlanAsPng() {
   }
 }
 
+function renderFoodItem(meal, food, foodIndex) {
+  const isEditing = editingFood && editingFood.mealId === meal.id && editingFood.foodIndex === foodIndex;
+  const safeName = escapeHtml(food.name);
+  const unit = food.unit || 'g';
+
+  const editPanel = isEditing ? `
+    <div class="edit-food-panel">
+      <div class="edit-food-grid">
+        <div>
+          <label class="control-label" for="edit-qty-${meal.id}-${foodIndex}">Quantidade</label>
+          <input class="field" type="number" id="edit-qty-${meal.id}-${foodIndex}" value="${escapeHtml(food.qty || 100)}" min="1" oninput="updateEditFoodPreview(${meal.id}, ${foodIndex})">
+        </div>
+        <div>
+          <label class="control-label" for="edit-unit-${meal.id}-${foodIndex}">Unidade</label>
+          <select class="select-field" id="edit-unit-${meal.id}-${foodIndex}" onchange="updateEditFoodPreview(${meal.id}, ${foodIndex})">
+            <option value="g" ${unit === 'g' ? 'selected' : ''}>g</option>
+            <option value="ml" ${unit === 'ml' ? 'selected' : ''}>ml</option>
+            <option value="unidade" ${unit === 'unidade' ? 'selected' : ''}>unidade</option>
+          </select>
+        </div>
+        <div class="edit-food-actions">
+          <button class="btn btn-soft" type="button" onclick="cancelEditFood()">Cancelar</button>
+          <button class="btn btn-primary" type="button" onclick="saveEditedFood(${meal.id}, ${foodIndex})">Salvar</button>
+        </div>
+      </div>
+      <div class="edit-food-preview" id="edit-preview-${meal.id}-${foodIndex}">${getEditedFoodPreview(food, food.qty || 100, unit)}</div>
+    </div>
+  ` : '';
+
+  return `
+    <div class="food-item" draggable="${isEditing ? 'false' : 'true'}" ondragstart="handleFoodDragStart(event, ${meal.id}, ${foodIndex})" ondragend="handleFoodDragEnd(event)">
+      <div class="food-info">
+        <div class="food-name">${safeName}</div>
+        <div class="food-detail">${escapeHtml(food.qty)}${escapeHtml(unit)} · P ${Math.round(food.prot || 0)}g · C ${Math.round(food.carb || 0)}g · G ${Math.round(food.fat || 0)}g · Fib ${Math.round(food.fiber || 0)}g · Aç ${Math.round(food.sugar || 0)}g · Na ${Math.round((food.sodium || 0) * 1000)}mg</div>
+        <div class="drag-hint">Arraste para mover entre refeições</div>
+      </div>
+      <div class="food-kcal">${Math.round(food.kcal || 0)} kcal</div>
+      <div class="food-actions">
+        <button class="edit-food-btn" type="button" onclick="editFood(${meal.id}, ${foodIndex})" title="Editar alimento" aria-label="Editar alimento">Editar</button>
+        <button class="duplicate-food-btn" type="button" onclick="duplicateFood(${meal.id}, ${foodIndex})" title="Duplicar alimento" aria-label="Duplicar alimento">Duplicar</button>
+        <button class="del-btn" type="button" onclick="removeFood(${meal.id}, ${foodIndex})" title="Remover alimento" aria-label="Remover alimento">×</button>
+      </div>
+      ${editPanel}
+    </div>
+  `;
+}
+
 function renderMeals() {
   const container = document.getElementById('meals-container');
   container.innerHTML = '';
@@ -2448,20 +2557,7 @@ function renderMeals() {
       </div>
 
       ${meal.foods.length === 0 ? `<div class="empty-msg">Nenhum alimento adicionado ainda</div>` : ''}
-      ${meal.foods.map((food, foodIndex) => `
-        <div class="food-item" draggable="true" ondragstart="handleFoodDragStart(event, ${meal.id}, ${foodIndex})" ondragend="handleFoodDragEnd(event)">
-          <div class="food-info">
-            <div class="food-name">${escapeHtml(food.name)}</div>
-            <div class="food-detail">${escapeHtml(food.qty)}${escapeHtml(food.unit || 'g')} · P ${Math.round(food.prot || 0)}g · C ${Math.round(food.carb || 0)}g · G ${Math.round(food.fat || 0)}g</div>
-            <div class="drag-hint">Arraste para mover entre refeições</div>
-          </div>
-          <div class="food-kcal">${Math.round(food.kcal || 0)} kcal</div>
-          <div class="food-actions">
-            <button class="duplicate-food-btn" type="button" onclick="duplicateFood(${meal.id}, ${foodIndex})" title="Duplicar alimento" aria-label="Duplicar alimento">Duplicar</button>
-            <button class="del-btn" type="button" onclick="removeFood(${meal.id}, ${foodIndex})" title="Remover alimento" aria-label="Remover alimento">×</button>
-          </div>
-        </div>
-      `).join('')}
+      ${meal.foods.map((food, foodIndex) => renderFoodItem(meal, food, foodIndex)).join('')}
     `;
     container.appendChild(div);
   });
@@ -2470,7 +2566,104 @@ function renderMeals() {
   saveState();
 }
 
+
+let editingFood = null;
+
+function getFoodBases(food) {
+  const qty = Number(food.qty) || 100;
+  const ratio = qty > 0 ? qty / 100 : 1;
+
+  return {
+    kcal100: Number.isFinite(Number(food.kcal100)) ? Number(food.kcal100) : (Number(food.kcal) || 0) / ratio,
+    prot100: Number.isFinite(Number(food.prot100)) ? Number(food.prot100) : (Number(food.prot) || 0) / ratio,
+    carb100: Number.isFinite(Number(food.carb100)) ? Number(food.carb100) : (Number(food.carb) || 0) / ratio,
+    fat100: Number.isFinite(Number(food.fat100)) ? Number(food.fat100) : (Number(food.fat) || 0) / ratio,
+    fiber100: Number.isFinite(Number(food.fiber100)) ? Number(food.fiber100) : (Number(food.fiber) || 0) / ratio,
+    sugar100: Number.isFinite(Number(food.sugar100)) ? Number(food.sugar100) : (Number(food.sugar) || 0) / ratio,
+    sodium100: Number.isFinite(Number(food.sodium100)) ? Number(food.sodium100) : (Number(food.sodium) || 0) / ratio,
+  };
+}
+
+function recalculateFoodByQuantity(food, qty, unit) {
+  const bases = getFoodBases(food);
+  const ratio = qty / 100;
+
+  food.qty = qty;
+  food.unit = unit;
+  food.kcal100 = bases.kcal100;
+  food.prot100 = bases.prot100;
+  food.carb100 = bases.carb100;
+  food.fat100 = bases.fat100;
+  food.fiber100 = bases.fiber100;
+  food.sugar100 = bases.sugar100;
+  food.sodium100 = bases.sodium100;
+  food.kcal = bases.kcal100 * ratio;
+  food.prot = bases.prot100 * ratio;
+  food.carb = bases.carb100 * ratio;
+  food.fat = bases.fat100 * ratio;
+  food.fiber = bases.fiber100 * ratio;
+  food.sugar = bases.sugar100 * ratio;
+  food.sodium = bases.sodium100 * ratio;
+}
+
+function getEditedFoodPreview(food, qty, unit) {
+  const bases = getFoodBases(food);
+  const ratio = (Number(qty) || 0) / 100;
+  const kcal = Math.round(bases.kcal100 * ratio);
+  const prot = Math.round(bases.prot100 * ratio);
+  const carb = Math.round(bases.carb100 * ratio);
+  const fat = Math.round(bases.fat100 * ratio);
+  const fiber = Math.round(bases.fiber100 * ratio);
+  const sugar = Math.round(bases.sugar100 * ratio);
+  const sodiumMg = Math.round(bases.sodium100 * ratio * 1000);
+
+  return `${qty}${unit} → ${kcal} kcal · P ${prot}g · C ${carb}g · G ${fat}g · Fib ${fiber}g · Aç ${sugar}g · Na ${sodiumMg}mg`;
+}
+
+function editFood(mealId, foodIndex) {
+  editingFood = { mealId, foodIndex };
+  renderMeals();
+}
+
+function cancelEditFood() {
+  editingFood = null;
+  renderMeals();
+}
+
+function updateEditFoodPreview(mealId, foodIndex) {
+  const meal = meals.find(item => item.id === mealId);
+  const food = meal?.foods?.[foodIndex];
+  const preview = document.getElementById(`edit-preview-${mealId}-${foodIndex}`);
+  if (!food || !preview) return;
+
+  const qty = parseFloat(document.getElementById(`edit-qty-${mealId}-${foodIndex}`).value) || 0;
+  const unit = document.getElementById(`edit-unit-${mealId}-${foodIndex}`).value;
+  preview.textContent = getEditedFoodPreview(food, qty, unit);
+}
+
+function saveEditedFood(mealId, foodIndex) {
+  const meal = meals.find(item => item.id === mealId);
+  const food = meal?.foods?.[foodIndex];
+  if (!food) return;
+
+  const qtyInput = document.getElementById(`edit-qty-${mealId}-${foodIndex}`);
+  const qty = parseFloat(qtyInput.value);
+  const unit = document.getElementById(`edit-unit-${mealId}-${foodIndex}`).value;
+
+  if (!Number.isFinite(qty) || qty <= 0) {
+    qtyInput.focus();
+    showToast('Digite uma quantidade válida.');
+    return;
+  }
+
+  recalculateFoodByQuantity(food, qty, unit);
+  editingFood = null;
+  renderMeals();
+  showToast('Alimento atualizado.');
+}
+
 function removeFood(mealId, index) {
+  editingFood = null;
   const meal = meals.find(item => item.id === mealId);
   if (!meal) return;
   meal.foods.splice(index, 1);
@@ -2479,6 +2672,7 @@ function removeFood(mealId, index) {
 }
 
 function duplicateFood(mealId, index) {
+  editingFood = null;
   const meal = meals.find(item => item.id === mealId);
   if (!meal || !meal.foods[index]) return;
 
@@ -2490,6 +2684,7 @@ function duplicateFood(mealId, index) {
 let draggedFood = null;
 
 function handleFoodDragStart(event, mealId, foodIndex) {
+  if (editingFood) return;
   draggedFood = { mealId, foodIndex };
   event.currentTarget.classList.add('dragging');
 
@@ -2521,6 +2716,7 @@ function handleMealDragLeave(event) {
 }
 
 function handleMealDrop(event, targetMealId) {
+  editingFood = null;
   event.preventDefault();
   event.currentTarget.classList.remove('drag-over');
 
@@ -2846,17 +3042,32 @@ function confirmAddFood(mealId) {
   const nutriments = product.nutriments || {};
   const ratio = qty / 100;
 
+  const kcal100 = Number(nutriments['energy-kcal_100g']) || 0;
+  const prot100 = Number(nutriments['proteins_100g']) || 0;
+  const carb100 = Number(nutriments['carbohydrates_100g']) || 0;
+  const fat100 = Number(nutriments['fat_100g']) || 0;
+  const fiber100 = Number(nutriments['fiber_100g']) || 0;
+  const sugar100 = Number(nutriments['sugars_100g']) || 0;
+  const sodium100 = getSodium100g(nutriments);
+
   const food = {
     name: String(product.product_name || 'Alimento').substring(0, 68),
     qty,
     unit,
-    kcal: (Number(nutriments['energy-kcal_100g']) || 0) * ratio,
-    prot: (Number(nutriments['proteins_100g']) || 0) * ratio,
-    carb: (Number(nutriments['carbohydrates_100g']) || 0) * ratio,
-    fat:  (Number(nutriments['fat_100g']) || 0) * ratio,
-    fiber: (Number(nutriments['fiber_100g']) || 0) * ratio,
-    sugar: (Number(nutriments['sugars_100g']) || 0) * ratio,
-    sodium: getSodium100g(nutriments) * ratio,
+    kcal100,
+    prot100,
+    carb100,
+    fat100,
+    fiber100,
+    sugar100,
+    sodium100,
+    kcal: kcal100 * ratio,
+    prot: prot100 * ratio,
+    carb: carb100 * ratio,
+    fat:  fat100 * ratio,
+    fiber: fiber100 * ratio,
+    sugar: sugar100 * ratio,
+    sodium: sodium100 * ratio,
   };
 
   const meal = meals.find(item => item.id === mealId);
@@ -2873,17 +3084,17 @@ document.addEventListener('keydown', event => {
     const mealId = Number(event.target.id.replace('qty-input-', ''));
     confirmAddFood(mealId);
   }
+
+  if (event.key === 'Enter' && event.target && /^edit-qty-/.test(event.target.id)) {
+    const [, , mealId, foodIndex] = event.target.id.split('-');
+    saveEditedFood(Number(mealId), Number(foodIndex));
+  }
 });
 
 document.getElementById('new-meal-input').addEventListener('keydown', event => {
   if (event.key === 'Enter') addMeal();
 });
 
-document.addEventListener('keydown', event => {
-  if (event.key === 'Enter' && document.activeElement?.id === 'qty-input') {
-    confirmAddFood();
-  }
-});
 
 document.getElementById('goal-input').addEventListener('input', () => {
   calcTotals();
