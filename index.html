@@ -190,6 +190,11 @@ button { -webkit-tap-highlight-color: transparent; }
 }
 .theme-switch:hover,
 .example-badge:hover { transform: scale(1.05); box-shadow: 0 5px 22px rgba(25,127,130,0.20); }
+.top-actions .top-export-btn {
+  min-height: 38px;
+  padding: 0 22px;
+  font-size: 0.68rem;
+}
 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgba(97,184,115,0.14); }
 
 .dashboard-container {
@@ -214,8 +219,11 @@ button { -webkit-tap-highlight-color: transparent; }
 .glass-card::before {
   content: '';
   position: absolute;
-  inset: 0 0 auto 0;
+  top: 0;
+  left: 18px;
+  right: 18px;
   height: 3px;
+  border-radius: 0 0 999px 999px;
   background: linear-gradient(90deg, var(--primary), var(--accent), var(--accent2));
 }
 .glass-card:nth-child(2) { animation-delay: .06s; }
@@ -1087,13 +1095,19 @@ select:focus {
   margin-top: 8px;
 }
 
+.actions-card.footer-actions .add-meal-row {
+  margin-top: 10px;
+  padding-top: 0;
+  border-top: 0;
+}
+
 @media (min-width: 901px) {
   .summary-card {
     grid-column: 1 / -1;
   }
 
   .actions-card.footer-actions {
-    min-height: 232px;
+    min-height: 0;
     max-height: none;
   }
 }
@@ -1294,16 +1308,13 @@ select:focus {
     </div>
   </div>
   <div class="top-actions" aria-label="Ações rápidas">
-    <button class="example-badge" type="button" onclick="document.getElementById('new-meal-input').focus()"><span class="dot"></span><span>Nova refeição</span></button>
-    <button class="theme-switch" type="button" onclick="copyPlanToNotion()">Copiar plano</button>
-    <button class="theme-switch" type="button" onclick="downloadPlanAsPng()">Baixar PNG</button>
+    <button class="example-badge" type="button" id="instructions-toggle" aria-expanded="false" aria-controls="instructions-box" onclick="toggleInstructions()"><span class="dot"></span><span>Instruções</span></button>
+    <button class="btn btn-primary top-export-btn" type="button" onclick="copyPlanToNotion()">Copiar dados</button>
+    <button class="btn btn-soft top-export-btn" type="button" onclick="downloadPlanAsPng()">Baixar PNG</button>
   </div>
 </header>
 
 <main class="dashboard-container">
-  <div class="instructions-row">
-    <button class="instructions-toggle" type="button" id="instructions-toggle" aria-expanded="false" aria-controls="instructions-box" onclick="toggleInstructions()">✨ Instruções</button>
-  </div>
   <div class="hint-box" id="instructions-box" hidden>
     <span class="hint-icon">✨</span>
     <span><strong>Monte seu planejamento</strong> buscando alimentos por refeição, ajustando quantidades e acompanhando calorias, macros e meta diária em tempo real.</span>
@@ -1373,18 +1384,8 @@ select:focus {
     <p class="card-note">Busque alimentos, ajuste a quantidade e arraste itens entre refeições quando precisar reorganizar.</p>
     <div id="meals-container"></div>
   </section>
-  <aside class="glass-card actions-card footer-actions" aria-label="Exportação e nova refeição">
-    <h2>Exportar e organizar</h2>
-    <div class="copy-plan-card">
-      <div>
-        <div class="copy-plan-title">Copiar planejamento para o Notion</div>
-        <p class="copy-plan-note">Gera um resumo organizado com totais, meta e alimentos separados por refeição.</p>
-      </div>
-      <div class="copy-plan-actions">
-        <button class="btn btn-primary copy-plan-btn" type="button" onclick="copyPlanToNotion()">Copiar dados</button>
-        <button class="btn btn-soft copy-plan-btn" type="button" onclick="downloadPlanAsPng()">Baixar PNG</button>
-      </div>
-    </div>
+  <aside class="glass-card actions-card footer-actions" aria-label="Nova refeição">
+    <h2>Nova refeição</h2>
     <div class="add-meal-row">
       <input class="field" type="text" id="new-meal-input" placeholder="Nome da nova refeição">
       <button class="btn btn-soft" type="button" onclick="addMeal()">Adicionar</button>
@@ -2146,7 +2147,7 @@ function renderFoodItem(meal, food, foodIndex) {
     <div class="food-item" draggable="${isEditing ? 'false' : 'true'}" ondragstart="handleFoodDragStart(event, ${meal.id}, ${foodIndex})" ondragend="handleFoodDragEnd(event)">
       <div class="food-info">
         <div class="food-name">${safeName}</div>
-        <div class="food-detail">${escapeHtml(food.qty)}${escapeHtml(unit)} · P ${Math.round(food.prot || 0)}g · C ${Math.round(food.carb || 0)}g · G ${Math.round(food.fat || 0)}g · Fib ${Math.round(food.fiber || 0)}g · Aç ${Math.round(food.sugar || 0)}g · Na ${Math.round((food.sodium || 0) * 1000)}mg</div>
+        <div class="food-detail">${escapeHtml(food.qty)}${escapeHtml(unit)} · Proteínas ${Math.round(food.prot || 0)}g · Carboidratos ${Math.round(food.carb || 0)}g · Gorduras ${Math.round(food.fat || 0)}g · Fibras ${Math.round(food.fiber || 0)}g · Açúcares ${Math.round(food.sugar || 0)}g · Sódio ${Math.round((food.sodium || 0) * 1000)}mg</div>
         <div class="drag-hint">Arraste para mover entre refeições</div>
       </div>
       <div class="food-kcal">${Math.round(food.kcal || 0)} kcal</div>
@@ -2280,7 +2281,7 @@ function getEditedFoodPreview(food, qty, unit) {
   const sugar = Math.round(bases.sugar100 * ratio);
   const sodiumMg = Math.round(bases.sodium100 * ratio * 1000);
 
-  return `${qty}${unit} → ${kcal} kcal · P ${prot}g · C ${carb}g · G ${fat}g · Fib ${fiber}g · Aç ${sugar}g · Na ${sodiumMg}mg`;
+  return `${qty}${unit} → ${kcal} kcal · Proteínas ${prot}g · Carboidratos ${carb}g · Gorduras ${fat}g · Fibras ${fiber}g · Açúcares ${sugar}g · Sódio ${sodiumMg}mg`;
 }
 
 function editFood(mealId, foodIndex) {
@@ -2687,7 +2688,7 @@ function updateQtyPreview(mealId) {
   const unit = document.getElementById(`unit-select-${mealId}`).value;
 
   document.getElementById(`qty-preview-${mealId}`).textContent =
-    `${qty}${unit} → ${kcal} kcal · P ${prot}g · C ${carb}g · G ${fat}g · Fib ${fiber}g · Na ${sodiumMg}mg`;
+    `${qty}${unit} → ${kcal} kcal · Proteínas ${prot}g · Carboidratos ${carb}g · Gorduras ${fat}g · Fibras ${fiber}g · Sódio ${sodiumMg}mg`;
 }
 
 function cancelQtyPanel(mealId) {
@@ -2750,7 +2751,7 @@ function toggleInstructions() {
   const willOpen = box.hasAttribute('hidden');
   box.toggleAttribute('hidden', !willOpen);
   btn.setAttribute('aria-expanded', String(willOpen));
-  btn.textContent = willOpen ? '✕ Fechar instruções' : '✨ Instruções';
+  btn.innerHTML = willOpen ? '<span class="dot"></span><span>Fechar instruções</span>' : '<span class="dot"></span><span>Instruções</span>';
 }
 
 document.addEventListener('keydown', event => {
