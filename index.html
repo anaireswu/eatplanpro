@@ -1268,6 +1268,19 @@ select:focus {
   }
 }
 
+
+
+/* Ajuste: título "Nova refeição" com a mesma fonte e tamanho de "Refeições". */
+.actions-card.footer-actions h2 {
+  margin: 0 0 16px 0 !important;
+  font-family: 'DM Serif Display', Georgia, serif !important;
+  font-size: 1.3rem !important;
+  color: var(--text-main) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
+  line-height: 1.2 !important;
+}
+
 </style>
 </head>
 <body>
@@ -1297,7 +1310,7 @@ select:focus {
   </div>
   <div class="top-actions" aria-label="Ações rápidas">
     <button class="example-badge" type="button" id="instructions-toggle" aria-expanded="false" aria-controls="instructions-box" onclick="toggleInstructions()"><span class="dot"></span><span>Instruções</span></button>
-    <button class="btn btn-primary top-export-btn" type="button" onclick="copyPlanToNotion()">Copiar dados</button>
+    <button class="btn btn-primary top-export-btn" type="button" onclick="copyPlanToNotion()">Copiar texto</button>
     <button class="btn btn-soft top-export-btn" type="button" onclick="downloadPlanAsPng()">Baixar PNG</button>
   </div>
 </header>
@@ -1523,11 +1536,11 @@ function buildNotionMarkdown() {
   const pct = goal > 0 ? Math.round((totals.kcal / goal) * 100) : 0;
   const lines = [];
 
-  lines.push('# Eat Plan Pro - Planejamento alimentar');
+  lines.push('Eat Plan Pro - Planejamento alimentar');
   lines.push('');
   lines.push(`Data: ${getTodayLabel()}`);
   lines.push('');
-  lines.push('## Resumo do dia');
+  lines.push('Resumo do dia');
   lines.push('');
   lines.push('| Métrica | Valor |');
   lines.push('|---|---:|');
@@ -1554,7 +1567,7 @@ function buildNotionMarkdown() {
       return acc;
     }, { kcal: 0, prot: 0, carb: 0, fat: 0, fiber: 0, sugar: 0, sodium: 0 });
 
-    lines.push(`## ${meal.name}`);
+    lines.push(`${meal.name}`);
     lines.push(`Total da refeição: ${formatNumber(Math.round(mealTotals.kcal))} kcal`);
     lines.push('');
 
@@ -1697,10 +1710,10 @@ async function copyPlanToNotion() {
       fallbackCopyText(plainText);
     }
 
-    showToast('Planejamento copiado. Agora é só colar no Notion.');
+    showToast('Texto copiado com sucesso.');
   } catch (error) {
     const copied = fallbackCopyText(plainText);
-    showToast(copied ? 'Planejamento copiado. Agora é só colar no Notion.' : 'Não foi possível copiar automaticamente.');
+    showToast(copied ? 'Texto copiado com sucesso.' : 'Não foi possível copiar automaticamente.');
   }
 }
 
